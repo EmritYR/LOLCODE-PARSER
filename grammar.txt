@@ -1,6 +1,6 @@
-<program> 		::= HAI <nlc> <code_block> <nlc> KTHXBAI
+<programme> 	    ::= HAI <nlc> <code_block> <nlc> KTHXBAI
 <code_block>		::= <statement> | <statement> <nlc> <code_block>
-<statement>		::= <declaration> | <comment> | <print_block> |
+<statement>		    ::= <declaration> | <comment> | <print_block> |
 		    	     <input_block> | <assignment> | <expression>
 
 <declaration>		::= I HAS A <label> | I HAS A <label> ITZ <value>
@@ -10,7 +10,7 @@
 <assignment>		::= <label> R <expression>
 <expression>		::= <equals> | <both> | <not_equals> | <greater> | <less> |
 		    	    <add> | <sub> | <mul> | <div> | <mod> |
-		    	    <either> |  <not> | <label> | 
+		    	    <either> |  <not_rule> | <label> |
 		    	    <atom>
 <equals>		::= BOTH SAEM <expression> AN <expression>
 <not_equals>	::= DIFFRINT <expression> AN <expression>
@@ -23,7 +23,7 @@
 <mul>			::= PRODUKT OF <expression> AN <expression>
 <div>			::= QUOSHUNT OF <expression> AN <expression>
 <mod>			::= MOD OF <expression> AN <expression>
-<not>			::= NOT <expression>
+<not_rule>		::= NOT <expression>
 <label>			::= (A-Za-z0-9)*
 <atom>			::= WIN | FAIL | NOOB | (0-9)* | (0-9)*.(0-9)* | "<string>"
 <string>		::= any character string
