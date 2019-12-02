@@ -8,11 +8,18 @@ argument_parser.add_argument('-debug', action='store_true')
 
 
 def programme():
+    """
+        Overall Structure of a LOLCODE file.
+        Must Begin with HAI must have version number after HAI
+        Must contain a code block, that is any valid LOLCODE line statement.
+        Must End with KTHXBYE which ends LOLCODE HAI code block.
+        :return:
+    """
     return hai, newlines, code_block, kthnxbye
 
 
 def hai():
-    return _(r'HAI')
+    return [ZeroOrMore((_(r'HAI'), float_literal)), _(r'HAI'), float_literal]
 
 
 def code_block():
@@ -28,7 +35,7 @@ def assignment():
 
 
 def print_block():
-    return _(r'VISIBLE'), expression, ZeroOrMore(_(r'VISIBLE'), expression), "MKAY?"
+    return _(r'VISIBLE'), expression, ZeroOrMore(_(r'VISIBLE'), expression)
 
 
 def statement():
@@ -92,7 +99,7 @@ def declaration():
 
 
 def simple_declaration():
-    return "I", "HAZ", "A", label
+    return "I", "HAS", "A", label
 
 
 def decl_assignment():
@@ -144,7 +151,7 @@ def string_literal():
 
 
 def kthnxbye():
-    return _(r'KTHNXBYE')
+    return _(r'KTHXBYE')
 
 
 def nl():
@@ -161,8 +168,7 @@ def main():
     fp = open(args.input, 'r')
     content = fp.read()
     fp.close()
-    # print(content)
-    # content = '"pokemon are"'
+
     if debug:
         parser = ParserPython(programme, ws='\t\r ', autokwd=True)
         parse_tree = parser.parse(content)

@@ -4,7 +4,7 @@
 <statement>		::= <declaration> | <comment> | <print_block> |
 		    	     <input_block> | <assignment> | <expression>
 
-<declaration>		::= I HAZ A <label> | I HAZ A <label> ITZ <value>
+<declaration>		::= I HAS A <label> | I HAZ A <label> ITZ <value>
 <comment>		    ::= BTW <string>
 <print_block>		::= VISIBLE <expression> <expression> … <expression> MKAY?
 <input_block>		::= GIMMEH <label>
