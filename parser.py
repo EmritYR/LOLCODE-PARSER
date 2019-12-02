@@ -8,6 +8,13 @@ argument_parser.add_argument('-debug', action='store_true')
 
 
 def programme():
+    """
+        Overall Structure of a LOLCODE file.
+        Must Begin with HAI must have version number after HAI
+        Must contain a code block, that is any valid LOLCODE line statement.
+        Must End with KTHXBYE which ends LOLCODE HAI code block.
+        :return:
+    """
     return hai, newlines, code_block, kthnxbye
 
 
@@ -23,20 +30,20 @@ def input_block():
     return _(r'GIMMEH'), label
 
 
-def assignment():
-    return label, "R", expression
-
-
-def print_block():
-    return _(r'VISIBLE'), expression, ZeroOrMore(_(r'VISIBLE'), expression)
-
-
 def statement():
     return [comment, declaration, input_block, print_block, expression, assignment]
 
 
 def expression():
     return [equals, both, not_equals, greater, less, add, sub, mul, div, mod, either, atom, not_rule, label]
+
+
+def simple_declaration():
+    return "I", "HAS", "A", label
+
+
+def assignment():
+    return label, "R", value
 
 
 def equals():
@@ -87,16 +94,12 @@ def not_rule():
     return "NOT", expression
 
 
-def declaration():
-    return [(simple_declaration, decl_assignment), simple_declaration]
-
-
-def simple_declaration():
-    return "I", "HAS", "A", label
-
-
 def decl_assignment():
     return "ITZ", value
+
+
+def print_block():
+    return _(r'VISIBLE'), expression, ZeroOrMore(_(r'VISIBLE'), expression)
 
 
 def comment():
@@ -105,6 +108,10 @@ def comment():
 
 def comment1():
     return _(r'BTW'), ZeroOrMore(string_body)
+
+
+def declaration():
+    return [(simple_declaration, decl_assignment), simple_declaration, assignment]
 
 
 def string():
@@ -143,16 +150,16 @@ def string_literal():
     return '"', ZeroOrMore(string_body), '"'
 
 
-def kthnxbye():
-    return _(r'KTHXBYE')
-
-
 def nl():
     return _(r'\n')
 
 
 def newlines():
     return OneOrMore(nl)
+
+
+def kthnxbye():
+    return _(r'KTHXBYE')
 
 
 def main():
